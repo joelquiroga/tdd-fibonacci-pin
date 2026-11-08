@@ -1,14 +1,8 @@
+// src/pin.js
+const SOLO_4_O_6_DIGITOS = /^(\d{4}|\d{6})$/
+const DIGITOS_REPETIDOS = /^(\d)\1+$/
+
 export function esPinValido(pin) {
-  if (pin === null || pin === undefined) return false
-  if (pin === '') return false
-  if (pin.length !== 4 && pin.length !== 6) return false
-  for (const c of pin) {
-    if (c < '0' || c > '9') return false
-  }
-  let todosIguales = true
-  for (const c of pin) {
-    if (c !== pin[0]) todosIguales = false
-  }
-  if (todosIguales) return false
-  return true
+  if (typeof pin !== 'string') return false
+  return SOLO_4_O_6_DIGITOS.test(pin) && !DIGITOS_REPETIDOS.test(pin)
 }
